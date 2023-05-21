@@ -20,7 +20,7 @@ public class Workspace extends Gmail{
 
     public void addMeeting(Meeting meeting){
         //add the meeting to calendar
-        calendar.add(meeting);
+        this.calendar.add(meeting);
 
     }
 
@@ -34,11 +34,11 @@ public class Workspace extends Gmail{
         Collections.sort(sortedCalender,(x,y)->x.getEndTime().compareTo(y.getEndTime())
                 );
         List<Meeting> maxMeeting = new ArrayList<>();
-        LocalTime time_limit=sortedCalender.get(0).getEndTime();
+        LocalTime time_limit = sortedCalender.get(0).getEndTime();
         maxMeeting.add(sortedCalender.get(0));
         for(Meeting meeting : sortedCalender)
         {
-            if(meeting.getStartTime().compareTo(time_limit)>=0){
+            if(meeting.getStartTime().compareTo(time_limit)>0){
                 maxMeeting.add(meeting);
                 time_limit=meeting.getEndTime();
             }
