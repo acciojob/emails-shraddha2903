@@ -13,6 +13,17 @@ public class Email {
         this.emailId = emailId;
         this.password = "Accio@123";
     }
+    public Email(String emailId,String password)
+    {
+        this.emailId=emailId;
+        if(isValidPass(password))
+        {
+            this.password=password;
+        }
+        else {
+            this.password="Accio@123";
+        }
+    }
 
     public String getEmailId() {
         return emailId;
@@ -51,7 +62,6 @@ public class Email {
         //check upperCase
         for(int i=0;i<n;i++)
         {
-            char c = pass.charAt(i);
             if(pass.charAt(i)>='A' && pass.charAt(i)<='Z')
             {
                 isUpperCase=true;

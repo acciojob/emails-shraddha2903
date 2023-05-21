@@ -46,7 +46,7 @@ public class Gmail extends Email {
             if(message.equals(mail.getRight()))
             {
                 mailToBeDelete=mail;
-                break;
+
             }
         }
         if(mailToBeDelete!=null){
