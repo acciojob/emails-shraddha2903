@@ -32,15 +32,15 @@ public class Email {
         if(oldPassword.equals(this.password)){
             if(isValidPass(newPassword))
             {
-                System.out.println("Password changed successfully\n");
+                System.out.println("Password changed successfully!");
                 this.password=newPassword;
             }
             else{
-                System.out.println("The new password is not valid\n");
+                System.out.println("The new password is not valid!");
             }
         }
         else{
-            System.out.println("The given password does not match current password\n");
+            System.out.println("The given password does not match current password!");
         }
     }
     public boolean isValidPass(String pass)
@@ -51,33 +51,25 @@ public class Email {
         //check upperCase
         for(int i=0;i<n;i++)
         {
+            char c = pass.charAt(i);
             if(pass.charAt(i)>='A' && pass.charAt(i)<='Z')
             {
                 isUpperCase=true;
             }
-        }
-        for(int i=0;i<n;i++)
-        {
-            if(pass.charAt(i)>='a' && pass.charAt(i)<='z')
+            else if(pass.charAt(i)>='a' && pass.charAt(i)<='z')
             {
                 isLowerCase=true;
             }
-        }
-        for(int i=0;i<n;i++)
-        {
-            if(pass.charAt(i)>='0' && pass.charAt(i)<='9')
+            else if(pass.charAt(i)>='0' && pass.charAt(i)<='9')
             {
                 isDigit=true;
             }
-        }
-        for(int i=0;i<n;i++)
-        {
-            char c = pass.charAt(i);
-            if(c=='@' || c=='&' || c=='*' || c=='%' || c=='#' || c=='!' || c=='^' || c=='$')
+            else
             {
                 isSpecialChar=true;
             }
         }
+
         return isSpecialChar && isDigit && isUpperCase && isLowerCase;
     }
 }
