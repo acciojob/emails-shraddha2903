@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class Gmail extends Email {
 
@@ -42,16 +43,18 @@ public class Gmail extends Email {
         // If the given message is found in any mail in the inbox, move the mail to trash, else do nothing
 
         Triple mailToBeDelete=null;
-        for(Triple<Date,String,String> mail : Inbox){
-            if(message.equals(mail.getRight()))
-            {
-                mailToBeDelete=mail;
+        Iterator var3 = this.Inbox.iterator();
 
+        while(var3.hasNext()) {
+            Triple<Date, String, String> mail = (Triple)var3.next();
+            if (message.equals(mail.getRight())) {
+                mailToBeDelete = mail;
             }
         }
-        if(mailToBeDelete!=null){
-            Trash.add(mailToBeDelete);
-            Inbox.remove(mailToBeDelete);
+
+        if (mailToBeDelete != null) {
+            this.Trash.add(mailToBeDelete);
+            this.Inbox.remove(mailToBeDelete);
         }
     }
 
