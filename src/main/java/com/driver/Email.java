@@ -80,6 +80,6 @@ public class Email {
             }
         }
 
-        return isSpecialChar && isDigit && isUpperCase && isLowerCase;
+        return (isSpecialChar && isDigit && isUpperCase && isLowerCase);
     }
 }
