@@ -17,8 +17,8 @@ public class Gmail extends Email {
     public Gmail(String emailId, int inboxCapacity) {
         super(emailId);
         this.inboxCapacity=inboxCapacity;
-        this.Inbox=new ArrayList<>();
-        this.Trash=new ArrayList<>();
+        this.Inbox=new ArrayList();
+        this.Trash=new ArrayList();
 
     }
 
@@ -28,14 +28,15 @@ public class Gmail extends Email {
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
 
-        if(getInboxSize()>=inboxCapacity)
+        Triple newMail;
+        if(this.getInboxSize()>=this.inboxCapacity)
         {
-            Triple<Date,String,String> oldMail=Inbox.get(0);
-            Inbox.remove(0);
-            Trash.add(oldMail);
+            Triple<Date,String,String> oldMail=this.Inbox.get(0);
+            this.Inbox.remove(0);
+            this.Trash.add(oldMail);
         }
-        Triple<Date,String,String> newMail=Triple.of(date,sender,message);
-        Inbox.add(newMail);
+        newMail=Triple.of(date,sender,message);
+        this.Inbox.add(newMail);
     }
 
     public void deleteMail(String message){
@@ -62,9 +63,9 @@ public class Gmail extends Email {
         // If the inbox is empty, return null
         // Else, return the message of the latest mail present in the inbox
 
-        if(Inbox.isEmpty())
+        if(this.Inbox.isEmpty())
             return null;
-        return Inbox.get((Inbox.size()-1)).getRight();
+        return this.Inbox.get((this.Inbox.size()-1)).getRight();
 
     }
 
@@ -72,11 +73,11 @@ public class Gmail extends Email {
         // If the inbox is empty, return null
         // Else, return the message of the oldest mail present in the inbox
 
-        if(Inbox.isEmpty())
+        if(this.Inbox.isEmpty())
         {
             return  null;
         }
-        return Inbox.get(0).getRight();
+        return this.Inbox.get(0).getRight();
     }
 
     public int findMailsBetweenDates(Date start, Date end){
@@ -88,7 +89,7 @@ public class Gmail extends Email {
             Date myDate=mail.getLeft();
             if(myDate.compareTo(start)>=0 && myDate.compareTo(end)<=0)
             {
-                count++;
+                ++count;
             }
         }
 
@@ -98,18 +99,18 @@ public class Gmail extends Email {
     public int getInboxSize(){
         // Return number of mails in inbox
 
-        return Inbox.size();
+        return this.Inbox.size();
     }
 
     public int getTrashSize(){
         // Return number of mails in Trash
 
-        return Trash.size();
+        return this.Trash.size();
     }
 
     public void emptyTrash(){
         // clear all mails in the trash
-        Trash.clear();
+        this.Trash.clear();
 
     }
 

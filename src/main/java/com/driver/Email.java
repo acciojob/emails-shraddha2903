@@ -50,13 +50,13 @@ public class Email {
                 System.out.println("The new password is not valid!");
             }
         }
-        else{
-            System.out.println("The given password does not match current password!");
-        }
+//        else{
+//            System.out.println("The given password does not match current password!");
+//        }
     }
     public boolean isValidPass(String pass)
     {
-        int n =pass.length();
+        int n = pass.length();
         if(n<8)
             return false;
         //check upperCase
