@@ -28,14 +28,13 @@ public class Gmail extends Email {
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
 
-        Triple newMail;
-        if(this.getInboxSize()>=this.inboxCapacity)
-        {
-            Triple<Date,String,String> oldMail=this.Inbox.get(0);
+        if (this.getInboxSize() >= this.inboxCapacity) {
+            Triple<Date, String, String> oldMail = (Triple)this.Inbox.get(0);
             this.Inbox.remove(0);
             this.Trash.add(oldMail);
         }
-        newMail=Triple.of(date,sender,message);
+
+        Triple newMail = Triple.of(date, sender, message);
         this.Inbox.add(newMail);
     }
 
@@ -43,7 +42,7 @@ public class Gmail extends Email {
         // Each message is distinct
         // If the given message is found in any mail in the inbox, move the mail to trash, else do nothing
 
-        Triple mailToBeDelete=null;
+        Triple mailToBeDelete = null;
         Iterator var3 = this.Inbox.iterator();
 
         while(var3.hasNext()) {
@@ -57,6 +56,7 @@ public class Gmail extends Email {
             this.Trash.add(mailToBeDelete);
             this.Inbox.remove(mailToBeDelete);
         }
+
     }
 
     public String findLatestMessage(){
@@ -84,11 +84,12 @@ public class Gmail extends Email {
         //find number of mails in the inbox which are received between given dates
         //It is guaranteed that start date <= end date
         int count=0;
-        for(Triple<Date,String,String> mail : Inbox)
-        {
-            Date myDate=mail.getLeft();
-            if(myDate.compareTo(start)>=0 && myDate.compareTo(end)<=0)
-            {
+        Iterator var4 = this.Inbox.iterator();
+
+        while(var4.hasNext()) {
+            Triple<Date, String, String> mail = (Triple)var4.next();
+            Date myDate = (Date)mail.getLeft();
+            if (myDate.compareTo(start) >= 0 && myDate.compareTo(end) <= 0) {
                 ++count;
             }
         }
